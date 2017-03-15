@@ -1,0 +1,31 @@
+{
+  "name": "gulp-protractor-tests-travis-ci-xcode",
+  "version": "1.0.0",
+  "description": "Gulp Protractor tests on travis ci xcode 8.2 image",
+  "main": "protractor.conf.js",
+  "scripts": {
+    "test": "gulp e2e"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rahulmr/gulp-protractor-tests-on-travis-mac.git"
+  },
+  "keywords": [
+    "gulp",
+    "protractor",
+    "travis-ci",
+    "jasmine",
+    "xcode"
+  ],
+  "author": "Rahul RAUT",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rahulmr/gulp-protractor-tests-on-travis-mac/issues"
+  },
+  "homepage": "https://github.com/rahulmr/gulp-protractor-tests-on-travis-mac#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-protractor": "mllrsohn/gulp-protractor#spawn_to_fork",
+    "jasmine": "^2.5.3"
+  }
+}
