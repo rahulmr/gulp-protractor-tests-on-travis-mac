@@ -2,9 +2,12 @@
 // https://raw.github.com/angular/protractor/master/example/conf.js
 exports.config = {
 
-  capabilities: {
+  multiCapabilities: [{
     'browserName': 'chrome'
   },
+  {
+      'browserName': 'firefox'
+  }],
 
   allScriptsTimeout: 80000,
 
