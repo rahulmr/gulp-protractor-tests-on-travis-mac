@@ -1,6 +1,7 @@
 // An example configuration file.
 // https://raw.github.com/angular/protractor/master/example/conf.js
 exports.config = {
+  directConnect: true,
 
   capabilities: {
     'browserName': 'chrome',
