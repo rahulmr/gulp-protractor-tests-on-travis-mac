@@ -3,7 +3,10 @@
 exports.config = {
 
   capabilities: {
-    'browserName': 'chrome'
+    'browserName': 'chrome',
+    'chromeOptions': {
+      'args': ['incognito', '--lang=en', '--window-size=1366,768']
+    }
   },
 
   allScriptsTimeout: 80000,
