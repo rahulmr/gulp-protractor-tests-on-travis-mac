@@ -1,29 +1,39 @@
-sudo: required
-dist: trusty
-addons:
-  apt:
-    sources:
-      - google-chrome
-    packages:
-      - google-chrome-stable
-
 language: node_js
 node_js:
-  - "7"
-  - "6"
-cache:
-  directories: node_modules
-branches:
-  only: master
+  - '7'
+  - '6'
+
+matrix:
+  include:
+    - os: linux
+      sudo: required
+      env: DISPLAY=':99.0'
+      dist: trusty
+      addons:
+        apt:
+          sources:
+            - google-chrome
+          packages:
+            - google-chrome-stable
+    - os: osx
+      sudo: required
+      env: HOMEBREW_CASK_OPTS='--appdir=/Applications'
+
+before_install:
+  - |
+    if [ "$TRAVIS_OS_NAME" = "osx" ]; then
+      brew update > /dev/null
+      brew cask install google-chrome
+    fi
+
+install:
+  - npm install
 
 before_script:
-  - export DISPLAY=:99.0
-  - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1280x1024x16"
-  - npm i -g npm@latest
-  - npm -v
-  - npm i -g gulp 
-  - sleep 3
+  - |
+    if [ "$TRAVIS_OS_NAME" = "linux" ]; then
+      "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1280x1024x16"
+    fi
 
 script:
-  - npm install
   - npm test
