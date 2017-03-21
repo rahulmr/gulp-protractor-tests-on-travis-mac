@@ -4,9 +4,6 @@ node_js:
   - '7'
   - '6'
 
-# cache:
-#   directories: node_modules
-
 branches:
   only: master
 
@@ -26,14 +23,14 @@ osx_image: xcode8.2
 dist: trusty
 jdk: oraclejdk8
 
-before_install:
-  - "export DISPLAY=':99.0'"
-  - if [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then export HOMEBREW_CASK_OPTS='--appdir=/Applications' ; fi
-  - if [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then brew update          ; fi
-  - if [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then brew cask install google-chrome ; fi
-  - if [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then 
+before_script:
+  - if [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then
+      export HOMEBREW_CASK_OPTS='--appdir=/Applications' ;
+      brew update ;
+      brew cask install google-chrome ;
       export DISPLAY=':99.0' ;
       ( sudo Xvfb :99.0 -ac -screen 0 1280x1024x16; echo ok )& 
+      sleep 3
     fi
   - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then
       export DISPLAY=':99.0' ;
@@ -42,11 +39,9 @@ before_install:
     fi
   - sleep 5
 
-install:
-  - npm install
+script:
   - npm i -g npm@latest
   - npm -v
   - npm i -g gulp@latest
-
-script:
+  - npm install
   - npm test
