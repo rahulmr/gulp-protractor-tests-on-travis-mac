@@ -4,6 +4,9 @@ branches:
 
 environment:
   nodejs_version: '7'
+  
+# clone directory
+clone_folder: 'c:\projects\gulp protractor tests'
 
 install:
   - choco install googlechrome
